@@ -9,6 +9,6 @@ namespace ApplicationCore.Interfaces
     {
 		Task<IEnumerable<TodoItem>> IncompleteItemsAsync();
 		Task AddItemAsync(string title);
-        Task<bool> MarkDoneAsync(Guid id);
+        Task<bool> MarkDoneAsync(int id);
     }
 }

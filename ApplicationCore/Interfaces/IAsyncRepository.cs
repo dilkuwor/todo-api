@@ -1,16 +1,17 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using ApplicationCore.Entities;
 
 namespace ApplicationCore.Interfaces
 {
 	public interface IAsyncRepository<T> where T: BaseEntity
     {
-		T GetByIdAsync(int id);
-		IEnumerable<T> ListAllAsync();
-		IEnumerable<T> ListAsync(ISpecification<T> specification);
-		T AddAsync(T entity);
-		void UpdateAsync(T entity);
-		void DeleteAsync(T entity);
+		Task<T> GetByIdAsync(int id);
+		Task<IEnumerable<T>> ListAllAsync();
+		Task<IEnumerable<T>> ListAsync(ISpecification<T> specification);
+		Task<T> AddAsync(T entity);
+		Task UpdateAsync(T entity);
+		Task DeleteAsync(T entity);
     }
 }

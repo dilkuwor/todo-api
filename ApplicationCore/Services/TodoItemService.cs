@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using ApplicationCore.Entities;
 using ApplicationCore.Interfaces;
+using ApplicationCore.Specifications;
 
 namespace ApplicationCore.Services
 {
@@ -14,6 +15,11 @@ namespace ApplicationCore.Services
 			_todoItemRepository = todoItemRepository;
         }
 
+        /// <summary>
+        /// add new todo item
+        /// </summary>
+        /// <param name="title"></param>
+        /// <returns></returns>
 		public async Task AddItemAsync(string title)
 		{
 			var item = new TodoItem()
@@ -23,14 +29,29 @@ namespace ApplicationCore.Services
 			await _todoItemRepository.AddAsync(item);
 		}
 
-		public Task<IEnumerable<TodoItem>> IncompleteItemsAsync()
+        /// <summary>
+        /// Returns incomplete todo items
+        /// </summary>
+        /// <returns></returns>
+		public async Task<IEnumerable<TodoItem>> IncompleteItemsAsync()
 		{
-			throw new NotImplementedException();
+            var isDone = false;
+            var todoItemSpec = new TodoItemFilterSpecification(isDone);
+            var query = await _todoItemRepository.ListAsync(todoItemSpec);
+            return query;
 		}
 
-		public Task<bool> MarkDoneAsync(Guid id)
+        /// <summary>
+        /// mark the selected todo item as completed
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+		public async Task<bool> MarkDoneAsync(int id)
 		{
-			throw new NotImplementedException();
+            var todoItem = await _todoItemRepository.GetByIdAsync(id);
+            todoItem.IsDone = true;
+            await _todoItemRepository.UpdateAsync(todoItem);
+            return true;
 		}
 	}
 }
