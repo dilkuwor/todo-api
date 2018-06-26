@@ -16,6 +16,6 @@ namespace ApplicationCore.Specifications
 
         public List<Expression<Func<T, object>>> Includes { get; } = new List<Expression<Func<T, object>>>();
 
-        public List<string> IncludeStrings => throw new NotImplementedException();
+        public List<string> IncludeStrings { get; } = new List<string>();
     }
 }

@@ -20,7 +20,9 @@ namespace IntegrationTests.Repositories.TodoItemRepositoryTests
         public GetById(ITestOutputHelper output)
         {
             _output = output;
-            var dbOptions = new DbContextOptionsBuilder<TodoContext>().Options;
+            var dbOptions = new DbContextOptionsBuilder<TodoContext>()
+                .UseInMemoryDatabase(databaseName:"TestTodo")
+                .Options;
             _todoContext = new TodoContext(dbOptions);
             _todoItemRepository = new TodoItemRepository(_todoContext);
         }

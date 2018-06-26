@@ -30,7 +30,7 @@ namespace Infrastructure.Data
                 .IsRequired(true)
                 .HasMaxLength(200);
             builder.Property(ci => ci.IsDone)
-                .IsRequired(false);
+                .IsRequired(true).HasDefaultValue(value:false);
 
         }
     }

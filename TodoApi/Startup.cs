@@ -29,7 +29,7 @@ namespace TodoApi
         public void ConfigureDevelopmentService(IServiceCollection services)
         {
             // use in-memory database
-            ConfigureDevelopmentService(services);
+            ConfigureInMemoryDatabases(services);
 
         }
 
@@ -38,7 +38,7 @@ namespace TodoApi
             // use in-memory database
             services.AddDbContext<TodoContext>(c =>
             c.UseInMemoryDatabase("MyTodo"));
-            ConfigureServices(services);
+            //ConfigureServices(services);
         }
 
 
@@ -50,8 +50,7 @@ namespace TodoApi
 
             services.AddScoped<ITodoItemService, TodoItemService>();
             services.AddScoped(typeof(IAppLogger<>), typeof(LoggerAdapter<>));
-
-
+            ConfigureDevelopmentService(services);
             services.AddMvc();
             _services = services;
         }
